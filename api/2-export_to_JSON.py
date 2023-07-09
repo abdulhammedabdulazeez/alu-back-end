@@ -7,8 +7,7 @@ from sys import argv
 
 def get_data(url):
     """gets data from an api"""
-    request = get(url)
-    
+    request = get(url)   
     if request.status_code == 200:
         return request.json()
     else:
@@ -30,7 +29,6 @@ def main():
     # Data object to write
     data = {}
     data[user_id] = []
-
     for todo in todos:
         data[user_id].append({'username': username, 'task': todo['title'], 'completed': todo['completed']})
     
