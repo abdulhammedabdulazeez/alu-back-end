@@ -3,6 +3,7 @@
 Exports user task data to a csv file
 """
 from requests import get
+from json import dump
 from sys import argv
 
 
@@ -28,16 +29,15 @@ def main():
     todos_url = f'https://jsonplaceholder.typicode.com/todos?userId={user_id}'
     todos = get_data(todos_url)
 
-    # Create text to write
-    text = ''
-    
-    for todo in todos:
-        todo_status = todo["completed"]
-        todo_title = todo["title"]
-        text += f'"{user_id}","{username}","{todo_status}","{todo_title}"\n'
+    # Data object to write
+    data = {}
+    data[user_id] = []
 
-    with open(f'{user_id}.csv', "w") as f:
-        f.write(text)
+    for todo in todos:
+        data[user_id].append({'username': username, 'task': todo['title'], 'completed': todo['completed']})
+    
+    with open(f'{user_id}.json', 'w') as f:
+        dump(data, f)
 
 
 if __name__ == "__main__":
