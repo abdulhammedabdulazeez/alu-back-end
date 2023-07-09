@@ -9,7 +9,7 @@ from json import dump
 def get_data(url):
     """gets data from an api"""
     request = get(url)
-    
+
     if request.status_code == 200:
         return request.json()
     else:
@@ -40,13 +40,17 @@ def main():
     # Add todos to data object
     for todo in todos:
         user_id = todo["userId"]
-        task_data = {'username': users_hashmap[user_id], 'task': todo['title'], 'completed': todo['completed']}
+        task_data = {
+                'username': users_hashmap[user_id],
+                'task': todo['title'],
+                'completed': todo['completed']
+        }
 
         if not user_id in data:
             data[user_id] = []
-        
+
         data[user_id].append(task_data)
-    
+
     with open(f'todo_all_employees.json', 'w') as f:
         dump(data, f)
 
