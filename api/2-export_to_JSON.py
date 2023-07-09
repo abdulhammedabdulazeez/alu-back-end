@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Exports user task data to a csv file"""
+"""
+Exports user task data to a csv file
+"""
 from requests import get
 from json import dump
 from sys import argv
@@ -7,7 +9,8 @@ from sys import argv
 
 def get_data(url):
     """gets data from an api"""
-    request = get(url)   
+    request = get(url)
+    
     if request.status_code == 200:
         return request.json()
     else:
@@ -29,6 +32,7 @@ def main():
     # Data object to write
     data = {}
     data[user_id] = []
+
     for todo in todos:
         data[user_id].append({'username': username, 'task': todo['title'], 'completed': todo['completed']})
     
