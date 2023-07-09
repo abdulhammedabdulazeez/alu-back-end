@@ -46,7 +46,7 @@ def main():
                 'completed': todo['completed']
         }
 
-        if not user_id in data:
+        if user_id not in data:
             data[user_id] = []
 
         data[user_id].append(task_data)
