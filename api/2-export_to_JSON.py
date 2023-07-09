@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Exports user task data to a csv file
-"""
+"""Exports user task data to a csv file"""
 from requests import get
 from json import dump
 from sys import argv
